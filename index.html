@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en-us">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="styles.css" />
-		<title>Shopping list</title>
-	</head>
-	<body>
-		<h1>My shopping list</h1>
 
-		<div>
-			<label for="item">Enter a new item:</label>
-			<input type="text" name="item" id="item" />
-			<button>Add item</button>
-		</div>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="styles.css" />
+	<title>Shopping list</title>
+</head>
 
-		<ul></ul>
-		<script type="module" src="index.js"></script>
-	</body>
+<body>
+	<h1>My shopping list</h1>
+	<div>
+		<label for="item">Enter a new item:</label>
+		<input type="text" name="item" id="item" />
+		<button>Add item</button>
+	</div>
+	<ul></ul>
+	<hr />
+	<div class="app">
+		<h1>Task Manager</h1>
+		<form id="task-form">
+			<input type="text" id="task-input" placeholder="Enter a new task" required />
+			<button type="submit">Add Task</button>
+		</form>
+		<ul id="task-list"></ul>
+	</div>
+	<script type="module" src="index.js"></script>
+</body>
+
 </html>
