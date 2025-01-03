@@ -1,19 +1,56 @@
+
 const btnClick = document.querySelector("button");
-let input = document.querySelector("input");
+const input = document.querySelector("input");
+const itemList = document.querySelector("ul");
+
+window.addEventListener("DOMContentLoaded", loadItems);
 
 btnClick.addEventListener("click", addItem);
 
 function addItem() {
-	if (input.value !== "") {
-		const itemList = document.querySelector("ul");
-		const item = document.createElement("li");
-		itemList.appendChild(item);
-		item.innerText = input.value;
+	const itemText = input.value.trim();
+	if (itemText !== "") {
+		addItemToDOM(itemText); 
+		saveItemToLocalStorage(itemText);
 		input.value = "";
 	} else {
 		alert("Empty field! Please enter an item.");
 	}
 }
+
+function addItemToDOM(itemText) {
+	const item = document.createElement("li");
+	item.innerHTML = `
+        ${itemText}
+        <button class="delete">X</button>
+      `;
+	itemList.appendChild(item);
+
+	item.querySelector(".delete").addEventListener("click", () => {
+		deleteItem(itemText, item);
+	});
+}
+
+function saveItemToLocalStorage(itemText) {
+	let items = JSON.parse(localStorage.getItem("shoppingList")) || [];
+	items.push(itemText);
+	localStorage.setItem("shoppingList", JSON.stringify(items));
+}
+
+function loadItems() {
+	const items = JSON.parse(localStorage.getItem("shoppingList")) || [];
+	items.forEach((itemText) => {
+		addItemToDOM(itemText); 
+	});
+}
+
+function deleteItem(itemText, itemElement) {
+	let items = JSON.parse(localStorage.getItem("shoppingList")) || [];
+	items = items.filter((item) => item !== itemText);
+	localStorage.setItem("shoppingList", JSON.stringify(items)); 
+	itemElement.remove();
+}
+
 
 class TaskManager {
 	constructor() {
